@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Nada que instalar, solo arte animado en HTML."
+  build:
+    commands:
+      - echo "No hay build, solo gloria visual."
+  post_build:
+    commands:
+      - echo "¡Listo para desplegar a tu mundo SAO!"
+
+artifacts:
+  files:
+    - '**/*'
