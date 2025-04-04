@@ -2,14 +2,20 @@ version: 0.2
 
 phases:
   install:
-    commands:
-      - echo "Nada que instalar, solo arte animado en HTML."
+    runtime-versions:
+      nodejs: 14
   build:
     commands:
-      - echo "No hay build, solo gloria visual."
+      - echo "Construyendo..."
   post_build:
     commands:
-      - echo "¡Listo para desplegar a tu mundo SAO!"
+      - echo "🚀 Copiando archivos a EC2"
+      - aws ssm send-command \
+          --document-name "AWS-RunShellScript" \
+          --targets "Key=instanceIds,Values=i-0196f39906e551614" \
+          --parameters 'commands=["sudo rm -rf /var/www/html/*", "sudo cp -r * /var/www/html/"]' \
+          --region us-east-1 \
+          --comment "Despliegue automático"
 
 artifacts:
   files:
